@@ -1,6 +1,9 @@
 import dotenv from "dotenv"
 import { AddressInfo } from "net"
 import express from "express"
+import { signup } from "./endpoints/signup"
+import { login } from "./endpoints/login"
+import { createFriendship } from "./endpoints/friendrequest"
 
 
 dotenv.config()
@@ -16,3 +19,8 @@ const server = app.listen(process.env.PORT || 3003, () => {
   }
 })
 
+app.post("/signup", signup);
+
+app.post("/login", login);
+
+app.post("/friendrequest", createFriendship);
