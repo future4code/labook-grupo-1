@@ -4,6 +4,7 @@ import express from "express"
 import { signup } from "./endpoints/signup"
 import { login } from "./endpoints/login"
 import { createFriendship } from "./endpoints/friendrequest"
+import { createPost } from "./endpoints/createpost"
 
 
 dotenv.config()
@@ -24,3 +25,5 @@ app.post("/signup", signup);
 app.post("/login", login);
 
 app.post("/friendrequest", createFriendship);
+
+app.post("/createpost", createPost)
