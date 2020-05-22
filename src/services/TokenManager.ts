@@ -6,7 +6,7 @@ export class TokenManager {
     return jwt.sign(
       payload,
       process.env.JWT_KEY as string,
-      { expiresIn: process.env.JWT_EXPIRE_TIME }
+      { expiresIn: "20min" }
     )
   }
 
