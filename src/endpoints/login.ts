@@ -10,6 +10,10 @@ export const login = async (req: Request, res: Response) => {
       password: req.body.password,
     };
 
+    if (!userData.email || !userData.password) {
+      throw new Error("Preencha os campos");
+    }
+
     const userDatabase: any = new UserDatabase();
     const user = await userDatabase.getUserEmail(userData.email);
 

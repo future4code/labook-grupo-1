@@ -12,10 +12,10 @@ export const getPostsFriends = async (
     const tokenData = tokenManager.retrieveDataFromToken(token);
 
     const postDataBase = new PostsDatabase();
-    const postsFriends = await postDataBase.getFeed(tokenData.id);
+    const feedPosts = await postDataBase.getFeed(tokenData.id);
 
     res.status(200).send({
-      postsFriends,
+      feedPosts,
     });
   } catch (err) {
     res.status(402).send({
