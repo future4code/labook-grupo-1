@@ -5,6 +5,6 @@ export interface UserGateway {
 
   getUserEmail(email:string): Promise<User | undefined> 
 
-  getUserId(id:string): Promise<User>
+  getUserId(id:string): Promise<User | undefined>
 
 }

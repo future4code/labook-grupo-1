@@ -30,8 +30,6 @@ export class LoginUC {
     this.validateInput(input)
     
     const user: User | undefined = await this.userGateway.getUserEmail(input.email)
-
-
     this.verifyUser(user)
     
     this.checkHash(input.password, user!.getHash())

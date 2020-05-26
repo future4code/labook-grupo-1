@@ -7,9 +7,7 @@ import { User } from "../business/entity/User";
 export class UserDatabase extends BaseDatabase implements UserGateway {
   private static TABLE_NAME = "User";
 
-  public async createUser(
-    user: User
-  ): Promise<void> {
+  public async createUser(user: User): Promise<void> {
     await this.setConnection()
       .insert({
         id: user.getId(),
@@ -20,29 +18,29 @@ export class UserDatabase extends BaseDatabase implements UserGateway {
       .into(UserDatabase.TABLE_NAME);
   }
 
-  private toModel (dbmodel?: any): User| undefined {
+  private toModel(dbmodel?: any): User | undefined {
     return dbmodel && new User(
-      dbmodel.id, 
-      dbmodel.password, 
-      dbmodel.email, 
-      dbmodel.name) 
+      dbmodel.id,
+      dbmodel.password,
+      dbmodel.email,
+      dbmodel.name)
   }
 
-  public async getUserEmail(email: string): Promise<User | undefined>  {
+  public async getUserEmail(email: string): Promise<User | undefined> {
     const result = await this.setConnection()
       .select("*")
       .from(UserDatabase.TABLE_NAME)
       .where({ email });
 
-     return this.toModel(result[0]);
+    return this.toModel(result[0]);
   }
 
-  public async getUserId(id: string): Promise<User> {
+  public async getUserId(id: string): Promise<User | undefined> {
     const result = await this.setConnection()
       .select("*")
       .from(UserDatabase.TABLE_NAME)
       .where({ id });
 
-    return result[0];
+    return this.toModel(result[0]);
   }
 }
