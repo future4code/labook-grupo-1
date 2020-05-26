@@ -1,6 +1,7 @@
 import * as bcrypt from "bcryptjs"
+import { HashGateway } from "../gateway/HashGateway"
 
-export class HashManager {
+export class HashManager implements HashGateway {
     public async generateHash(password: string): Promise<string> {
         const cost = Number(process.env.BCRYPT_COST)
         const salt = await bcrypt.genSalt(cost)

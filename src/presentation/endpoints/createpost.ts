@@ -1,7 +1,7 @@
-import { IdGenerator } from "../services/IdGenerator";
-import { TokenManager } from "../services/TokenManager";
+import { IdGenerator } from "../../business/services/IdManager";
+import { TokenManager } from "../../business/services/TokenManager";
 import { Request, Response } from "express";
-import { PostsDatabase } from "../data/PostsDatabase";
+import { PostsDatabase } from "../../data/PostsDatabase";
 import * as moment from "moment";
 
 export const createPost = async (

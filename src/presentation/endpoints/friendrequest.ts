@@ -1,7 +1,7 @@
-import { TokenManager } from "../services/TokenManager";
+import { TokenManager } from "../../business/services/TokenManager";
 import { Request, Response } from "express";
-import { FriendsDatabase } from "../data/FriendsDatabase";
-import { UserDatabase } from "../data/UserDatabase";
+import { FriendsDatabase } from "../../data/FriendsDatabase";
+import { UserDatabase } from "../../data/UserDatabase";
 
 export const createFriendship = async (
   req: Request,

@@ -1,6 +1,6 @@
-import { TokenManager } from "../services/TokenManager";
+import { TokenManager } from "../../business/services/TokenManager";
 import { Request, Response } from "express";
-import { PostsDatabase } from "../data/PostsDatabase";
+import { PostsDatabase } from "../../data/PostsDatabase";
 
 export const getPostsType = async (
   req: Request,
