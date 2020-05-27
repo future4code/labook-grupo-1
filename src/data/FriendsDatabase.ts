@@ -1,7 +1,8 @@
 import { BaseDatabase } from "./BaseDatabase";
 import { Friendship } from "../business/entity/Friendship";
+import { FriendshipGateway } from "../business/gateway/FriendshipGateway";
 
-export class FriendsDatabase extends BaseDatabase {
+export class FriendsDatabase extends BaseDatabase implements FriendshipGateway {
   public static TABLE_NAME = "friends";
 
   private toModel(dbModel?:any): Friendship | undefined {
@@ -34,5 +35,18 @@ export class FriendsDatabase extends BaseDatabase {
       });
 
       return this.toModel(result[0])
+  }
+
+  public async deleteFriendship(relation: Friendship): Promise<void> {
+    await this.setConnection()(FriendsDatabase.TABLE_NAME)
+    .delete()
+    .where({
+      friendsender_id: relation.getSenderId(),
+      friendreceiver_id: relation.getReceiverId(),
+    })
+    .orWhere({
+      friendsender_id: relation.getReceiverId(),
+      friendreceiver_id: relation.getSenderId(),
+    });
   }
 }

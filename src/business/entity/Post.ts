@@ -5,7 +5,7 @@ export class Post {
     private description: string,
     private userCreatorId: string,
     private type: PostType,
-    private createdAt: number
+    private createdAt: number | string
   ){}
   
 
@@ -24,12 +24,12 @@ export class Post {
   public getType():string{
     return this.type
   }
-  public getCreatedAt():number{
+  public getCreatedAt():number | string{
     return this.createdAt
   }
 }
 
-enum PostType {
+export enum PostType {
   NORMAL = "normal",
   EVENTO = 'eveno'
 }

@@ -5,7 +5,7 @@ import { UserGateway } from "../business/gateway/UserGateway";
 import { User } from "../business/entity/User";
 
 export class UserDatabase extends BaseDatabase implements UserGateway {
-  private static TABLE_NAME = "User";
+  static TABLE_NAME = "User";
 
   public async createUser(user: User): Promise<void> {
     await this.setConnection()

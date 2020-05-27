@@ -1,51 +1,26 @@
-import { IdGenerator } from "../../business/services/IdManager";
-import { TokenManager } from "../../business/services/TokenManager";
 import { Request, Response } from "express";
+import { IdManager } from "../../business/services/IdManager";
+import { TokenManager } from "../../business/services/TokenManager";
 import { PostsDatabase } from "../../data/PostsDatabase";
-import * as moment from "moment";
 
-export const createPost = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+import { CreatePostUC } from "../../business/usecases/CreatePost";
+
+export const createPost = async (req: Request, res: Response): Promise<void> => {
   try {
-    const token = req.headers.authorization as string;
+   const uc = new CreatePostUC(
+     new PostsDatabase(),
+     new IdManager(),
+     new TokenManager(),
+   )
 
-    const postData = {
-      picurl: req.body.picurl,
-      description: req.body.description,
-      type: req.body.type,
-    };
+   const result = await uc.execut({
+    picURL: req.body.picURL,
+    description: req.body.description,
+    userCreatorToken: req.headers.authorization as string,
+    type: req.body.type
+   })
 
-    if (!postData.picurl || !postData.description || !postData.type) {
-      throw new Error("Preencha todos os campos");
-    }
-
-    if (postData.type !== "normal" && postData.type !== "evento") {
-      throw new Error("Tipo de post invalido.");
-    }
-
-    const postDate: number = moment.now();
-
-    const tokenManager = new TokenManager();
-    const tokenData = tokenManager.retrieveDataFromToken(token);
-
-    const idGenerator: any = new IdGenerator();
-    const id: string = idGenerator.generateId();
-
-    const newPostsDatabase = new PostsDatabase();
-    await newPostsDatabase.newPost(
-      id,
-      postData.picurl,
-      postData.description,
-      postDate,
-      tokenData.id,
-      postData.type
-    );
-
-    res.status(200).send({
-      sucess: "Post criado com sucesso.",
-    });
+    res.status(200).send(result);
   } catch (err) {
     res.status(402).send({
       messager: err.message,

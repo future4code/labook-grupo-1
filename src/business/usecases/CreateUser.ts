@@ -12,9 +12,9 @@ export class CreateUserUC {
     private tokenManager: TokenGateway
   ) { }
 
-  private id:string = this.idGenerator.generateId()
+  private id: string = this.idGenerator.generateId()
 
-  private validateInput(input: CreateUserUCInput){
+  private validateInput(input: CreateUserUCInput): void {
     if (!input.email || !input.name || !input.password) {
       throw new Error("Preencha todos os campos");
     }
@@ -22,19 +22,19 @@ export class CreateUserUC {
 
   public async execute(input: CreateUserUCInput): Promise<CreateUserUCOutput> {
     this.validateInput(input)
-    
+
     const user = new User(
       this.id,
       await this.hashManager.generateHash(input.password),
       input.email,
       input.name
     )
-    
+
     await this.userGateway.createUser(user)
 
     return {
-      token: this.tokenManager.generateToken({id: this.id})
-    } 
+      token: this.tokenManager.generateToken({ id: this.id })
+    }
   }
 }
 
