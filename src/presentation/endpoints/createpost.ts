@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { IdManager } from "../../business/services/IdManager";
 import { TokenManager } from "../../business/services/TokenManager";
 import { PostsDatabase } from "../../data/PostsDatabase";
-
 import { CreatePostUC } from "../../business/usecases/CreatePost";
 
 export const createPost = async (req: Request, res: Response): Promise<void> => {
@@ -27,3 +26,4 @@ export const createPost = async (req: Request, res: Response): Promise<void> => 
     });
   }
 };
+
