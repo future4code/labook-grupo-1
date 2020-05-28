@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { PostsDatabase } from "../../data/PostsDatabase";
 import { GetPostFeedUC } from "../../business/usecases/GetPostFeed";
 
-export const getPostsFriends = async (req: Request, res: Response): Promise<void> => {
+export const getPostFeed = async (req: Request, res: Response): Promise<void> => {
   try {
     const uc = new GetPostFeedUC(
       new PostsDatabase(),

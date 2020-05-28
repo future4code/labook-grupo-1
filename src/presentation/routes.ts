@@ -3,8 +3,8 @@ import { signup } from "./endpoints/signup";
 import { login } from "./endpoints/login";
 import { createFriendship } from "./endpoints/friendrequest";
 import { createPost } from "./endpoints/createpost";
-import { getPostsFriends } from "./endpoints/getPostsFriends";
-import { getPostsType } from "./endpoints/getPostsType";
+import { getPostFeed } from "./endpoints/getPostFeed";
+import { getPostsFeedByType } from "./endpoints/getPostsFeedByType";
 import { deleteFriendship } from './endpoints/deleteFirendship';
 
 const app = express()
@@ -18,7 +18,7 @@ app.post("/post/create", createPost);
 
 app.delete("/friendship", deleteFriendship)
 
-app.get("/post/feed", getPostsFriends);
-app.get("/post/feedtype", getPostsType);
+app.get("/post/feed", getPostFeed);
+app.get("/post/feed/:type", getPostsFeedByType);
 
 export default app;
