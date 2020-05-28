@@ -6,7 +6,7 @@ import * as moment from 'moment'
 
 export class CreatePostUC {
   constructor(
-    private postGateway: PostGateway,
+    private postDB: PostGateway,
     private idGenerator: IdGeneratorGateway,
     private tokenManager: TokenGateway
   ) { }
@@ -32,7 +32,7 @@ export class CreatePostUC {
     }
   }
 
-  public async execut(input: CreatePostUCInput): Promise<CreatePostUCOutput> {
+  public async execute(input: CreatePostUCInput): Promise<CreatePostUCOutput> {
     this.validateInput(input)
     const userData = this.retrieveUserId(input.userCreatorToken)
 
@@ -45,7 +45,7 @@ export class CreatePostUC {
       moment.now()
     )
 
-    await this.postGateway.createPost(post)
+    await this.postDB.createPost(post)
 
     return {
       message: 'Post criado com sucesso'

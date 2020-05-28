@@ -6,6 +6,7 @@ import { createPost } from "./endpoints/createpost";
 import { getPostFeed } from "./endpoints/getPostFeed";
 import { getPostsFeedByType } from "./endpoints/getPostsFeedByType";
 import { deleteFriendship } from './endpoints/deleteFirendship';
+import { createComment } from './endpoints/createComment';
 
 const app = express()
 
@@ -20,5 +21,7 @@ app.delete("/friendship", deleteFriendship)
 
 app.get("/post/feed", getPostFeed);
 app.get("/post/feed/:type", getPostsFeedByType);
+
+app.put("/post/comment/:postId", createComment)
 
 export default app;

@@ -4,7 +4,7 @@ import { Post } from "../entity/Post"
 
 export class GetPostFeedUC {
   constructor(
-    private postGateway: PostGateway,
+    private postDB: PostGateway,
     private tokenManager: TokenGateway
   ){}
 
@@ -22,6 +22,6 @@ export class GetPostFeedUC {
     this.validateInput(userToken)
     const userData = this.retrieveUserId(userToken)
     
-    return await this.postGateway.getFeed(userData.id)
+    return await this.postDB.getFeed(userData.id)
   }
 }

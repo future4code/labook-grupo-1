@@ -6,7 +6,7 @@ import { TokenGateway } from '../gateway/TokenGateway';
 
 export class CreateUserUC {
   constructor(
-    private userGateway: UserGateway,
+    private userDB: UserGateway,
     private idGenerator: IdGeneratorGateway,
     private hashManager: HashGateway,
     private tokenManager: TokenGateway
@@ -30,7 +30,7 @@ export class CreateUserUC {
       input.name
     )
 
-    await this.userGateway.createUser(user)
+    await this.userDB.createUser(user)
 
     return {
       token: this.tokenManager.generateToken({ id: this.id })

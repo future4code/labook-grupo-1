@@ -5,7 +5,7 @@ import { HashGateway } from "../gateway/HashGateway";
 
 export class LoginUC {
   constructor(
-    private userGateway: UserGateway,
+    private userDB: UserGateway,
     private hashManager: HashGateway,
     private tokenManager: TokenGateway
   ) { }
@@ -29,7 +29,7 @@ export class LoginUC {
   public async execute(input: LoginUCInput): Promise<LoginUCOutput> {
     this.validateInput(input)
     
-    const user: User | undefined = await this.userGateway.getUserEmail(input.email)
+    const user: User | undefined = await this.userDB.getUserEmail(input.email)
     this.verifyUser(user)
     
     this.checkHash(input.password, user!.getHash())

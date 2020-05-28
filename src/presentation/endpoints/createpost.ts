@@ -13,7 +13,7 @@ export const createPost = async (req: Request, res: Response): Promise<void> => 
      new TokenManager(),
    )
 
-   const result = await uc.execut({
+   const result = await uc.execute({
     picURL: req.body.picURL,
     description: req.body.description,
     userCreatorToken: req.headers.authorization as string,

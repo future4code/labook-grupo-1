@@ -4,7 +4,7 @@ import { Post, PostType } from "../entity/Post"
 
 export class GetPostFeedByTypeUC {
   constructor(
-    private postGateway: PostGateway,
+    private postDB: PostGateway,
     private tokenManager: TokenGateway
   ){}
 
@@ -33,6 +33,6 @@ export class GetPostFeedByTypeUC {
     this.validateInput(userToken, postType)
     const userData = this.retrieveUserId(userToken)
     const type = this.mapStringToPostType(postType)
-    return await this.postGateway.getFeedByType(userData.id, type)
+    return await this.postDB.getFeedByType(userData.id, type)
   }
 }

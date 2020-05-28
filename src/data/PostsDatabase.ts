@@ -57,5 +57,14 @@ export class PostsDatabase extends BaseDatabase implements PostGateway {
 
     return this.toModel(result[0])
   }
+
+  public async getPostById(postId: string): Promise<Post[]>{
+    const result = await this.setConnection().raw(`
+    SELECT * FROM ${PostsDatabase.TABLE_NAME}
+    WHERE id = "${postId}" 
+    `);
+
+    return this.toModel(result[0])
+  }
 }
 

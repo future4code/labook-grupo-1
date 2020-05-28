@@ -6,4 +6,6 @@ export interface PostGateway {
   getFeed(userId: string): Promise<Post[]>
 
   getFeedByType(userId: string, postType: PostType): Promise<Post[]>
+
+  getPostById(postId: string): Promise<Post[]>
 }

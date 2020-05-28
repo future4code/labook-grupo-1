@@ -5,7 +5,7 @@ import { Friendship } from "../entity/Friendship";
 
 export class DeleteFriendshipUC {
   constructor(
-    private friendshipGateway: FriendshipGateway,
+    private friendshiDB: FriendshipGateway,
     private userGateway: UserGateway,
     private tokenManager: TokenGateway
   ){}
@@ -37,7 +37,7 @@ export class DeleteFriendshipUC {
     const result: Friendship | undefined = await this.friendshipGateway.checkFriendship(friendship)
     this.checkFriendship(result)
 
-    await this.friendshipGateway.deleteFriendship(friendship)
+    await this.friendshiDB.deleteFriendship(friendship)
 
     return {
       message: "Amizade deletada com sucesso"

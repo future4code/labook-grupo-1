@@ -5,7 +5,7 @@ import { UserGateway } from "../gateway/UserGateway";
 
 export class CreateFriendshipUC {
   constructor(
-    private friendshipGateway: FriendshipGateway,
+    private friendshiDB: FriendshipGateway,
     private userGateway: UserGateway,
     private tokenManager: TokenGateway
   ) { }
@@ -38,7 +38,7 @@ export class CreateFriendshipUC {
     const result: Friendship | undefined = await this.friendshipGateway.checkFriendship(friendship)
     this.checkFriendship(result)
 
-    await this.friendshipGateway.createFriendship(friendship)
+    await this.friendshiDB.createFriendship(friendship)
 
     return {
       message: "Amizade criada com sucesso"
