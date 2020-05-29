@@ -1,41 +1,42 @@
 import { BaseDatabase } from "./BaseDatabase";
-import { FriendsDatabase } from "./FriendsDatabase";
-import * as moment from "moment";
+import { User } from "../models/User";
 
 export class UserDatabase extends BaseDatabase {
   private static TABLE_NAME = "User";
 
-  public async createUser(
-    id: string,
-    name: string,
-    email: string,
-    password: string
-  ): Promise<void> {
+  private toModel(dbModel?: any): User | undefined {
+    return (
+      dbModel &&
+      new User(dbModel.id, dbModel.name, dbModel.email, dbModel.password)
+    );
+  }
+
+  public async createUser(user: User): Promise<void> {
     await this.setConnection()
       .insert({
-        id,
-        name,
-        email,
-        password,
+        id: user.getId(),
+        name: user.getName(),
+        email: user.getEmail(),
+        password: user.getPassword(),
       })
       .into(UserDatabase.TABLE_NAME);
   }
 
-  public async getUserEmail(email: string): Promise<any> {
+  public async getUserEmail(email: string): Promise<User | undefined> {
     const result = await this.setConnection()
       .select("*")
       .from(UserDatabase.TABLE_NAME)
       .where({ email });
 
-    return result[0];
+    return this.toModel(result[0]);
   }
 
-  public async getUserId(id: string): Promise<any> {
+  public async getUserId(id: string): Promise<User | undefined> {
     const result = await this.setConnection()
       .select("*")
       .from(UserDatabase.TABLE_NAME)
       .where({ id });
 
-    return result[0];
+    return this.toModel(result[0]);
   }
 }
