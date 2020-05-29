@@ -22,16 +22,31 @@ export class FriendsDatabase extends BaseDatabase {
       .into(FriendsDatabase.TABLE_NAME);
   }
 
+  public async deleteFriendship(
+    idSender: string,
+    idReceiver: string
+  ): Promise<void> {
+    await this.setConnection()
+      .delete()
+      .from(FriendsDatabase.TABLE_NAME)
+      .where({ friendsender_id: idSender, friendreceiver_id: idReceiver })
+      .orWhere({
+        friendsender_id: idReceiver,
+        friendreceiver_id: idSender,
+      });
+  }
+
   public async checkFriendship(
     idSender: string,
     idReceiver: string
   ): Promise<any> {
-    return await this.setConnection()
+    const result = await this.setConnection()
       .select("*")
       .from(FriendsDatabase.TABLE_NAME)
       .where({
         friendsender_id: idSender,
         friendreceiver_id: idReceiver,
       });
+    return result[0];
   }
 }

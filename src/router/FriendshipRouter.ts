@@ -6,3 +6,4 @@ export const friendshipRouter = express.Router();
 const friendship = new FriendsController();
 
 friendshipRouter.post("/friendrequest", friendship.createFriendship);
+friendshipRouter.delete("/friendrequest", friendship.deleteFriendship);

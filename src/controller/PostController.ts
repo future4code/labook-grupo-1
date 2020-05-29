@@ -54,13 +54,13 @@ export class PostController {
     }
   }
 
-  async getPostsFriends(req: Request, res: Response) {
+  async getFeed(req: Request, res: Response) {
     try {
       const token = req.headers.authorization as string;
       const tokenManager = new TokenManager();
       const tokenData = tokenManager.retrieveDataFromToken(token);
 
-      const feedPosts = await new PostBusiness().getPostFriends(tokenData);
+      const feedPosts = await new PostBusiness().getFeed(tokenData.id);
 
       res.status(200).send({
         feedPosts,

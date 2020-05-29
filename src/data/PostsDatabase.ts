@@ -34,11 +34,11 @@ export class PostsDatabase extends BaseDatabase {
 
   public async getFeed(id: string): Promise<Post[]> {
     const result = await this.setConnection().raw(`
-    SELECT * minus f.friendsender_id FROM Posts p
+    SELECT * FROM Posts p
     JOIN friends f ON f.friendreceiver_id = p.user_id
     WHERE f.friendsender_id = "${id}" 
     ORDER BY p.create_date DESC`);
-
+    console.log(id);
     return result[0].map((post: any) => {
       return this.toModel(post);
     }) as Post[];

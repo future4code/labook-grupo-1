@@ -5,7 +5,6 @@ export class UserDatabase extends BaseDatabase {
   private static TABLE_NAME = "User";
 
   private toModel(dbModel?: any): User | undefined {
-    // não compreendi bem
     return (
       dbModel &&
       new User(dbModel.id, dbModel.name, dbModel.email, dbModel.password)

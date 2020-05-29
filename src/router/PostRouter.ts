@@ -13,5 +13,7 @@ const likeDeslikeManager = new LikeDeslikeController();
 
 postRouter.post("/likeDeslike", likeDeslikeManager.likeDeslike);
 postRouter.post("/create", post.createPost);
+
 postRouter.get("/feedtype", post.getPostsType);
+postRouter.get("/feed", post.getFeed);
 postRouter.get("/comment", postComment.createComment);

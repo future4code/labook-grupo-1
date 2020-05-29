@@ -21,4 +21,24 @@ export class FriendsBusiness {
     }
     await friendRequest.createFriendship(userId, friendReceiverId);
   }
+
+  async deleteFriendship(friendReceiverId: string, userId: string) {
+    const user = await new UserDatabase().getUserId(userId);
+
+    const friend = await new UserDatabase().getUserId(friendReceiverId);
+
+    if (!user || !friend) {
+      throw new Error("Usuários não encontrado");
+    }
+
+    const friendRequest = new FriendsDatabase();
+    const friendCheck = await friendRequest.checkFriendship(
+      userId,
+      friendReceiverId
+    );
+    if (!friendCheck) {
+      throw new Error("Amizade não existe.");
+    }
+    await friendRequest.deleteFriendship(userId, friendReceiverId);
+  }
 }

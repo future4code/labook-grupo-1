@@ -32,7 +32,7 @@ export class PostBusiness {
 
     return postType;
   }
-  async getPostFriends(id: string) {
+  async getFeed(id: string) {
     const postDataBase = new PostsDatabase();
     const feedPosts = await postDataBase.getFeed(id);
 
