@@ -35,7 +35,7 @@ export class CreateFriendshipUC {
       input.receiverId,
     )
 
-    const result: Friendship | undefined = await this.friendshipGateway.checkFriendship(friendship)
+    const result: Friendship | undefined = await this.friendshiDB.checkFriendship(friendship)
     this.checkFriendship(result)
 
     await this.friendshiDB.createFriendship(friendship)
